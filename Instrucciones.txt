@@ -1,0 +1,34 @@
+Desafío 13: Servidor con balance de carga
+
+a) Para iniciar servidor
+   modo FORK ejecutar: npm start
+   modo CLUSTER ejecutar: node appProcess.js 8081 CLUSTER 
+
+b) el numero de procesadores prestentes quedo en la ruta "/api/info"
+
+c) Ejecutar servidor con nodemon
+   nodemon appProcess.js
+   nodemon appProcess.js 8081 CLUSTER
+
+d)Ejecutar servidor con forever
+  ejecutar: npm start 4e-start
+  
+  para listar los procesos con forever, se debe ejecutar "forever list". En caso de no haber instalado forever de forma global,
+  ejecutar "npx forever list"
+
+e) ejecutar servidor modo FORK utilizando PM2
+
+
+Listar PM2:
+
+    pm2 start appProcess.js
+    pm2 list
+
+    pm2 start appProcess.js --name="server-cluster" -i max 
+    pm2 list
+
+
+Modo escucha: se agrega "watch"
+ej:
+    pm2 start appProcess.js --name="server-cluster" -i max
+    forever start -watch appProcess.js
