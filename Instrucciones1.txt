@@ -1,0 +1,56 @@
+Desafío 13: Servidor con balance de carga
+
+a) Para iniciar servidor
+   modo FORK ejecutar: npm start
+   modo CLUSTER ejecutar: node appProcess.js 8081 CLUSTER 
+
+b) el numero de procesadores prestentes quedo en la ruta "/api/info"
+
+c) Ejecutar servidor con nodemon
+   nodemon appProcess.js
+   nodemon appProcess.js 8081 CLUSTER
+
+d)Ejecutar servidor con forever
+  ejecutar: npm start 4e-start
+  
+  para listar los procesos con forever, se debe ejecutar "forever list". En caso de no haber instalado forever de forma global,
+  ejecutar "npx forever list"
+
+e) ejecutar servidor modo FORK utilizando PM2
+
+
+Listar PM2:
+
+    pm2 start appProcess.js --name="fork-server1"
+    pm2 list
+
+    pm2 start appProcess.js --name="server-cluster" -i max 
+    pm2 list
+
+
+Modo escucha: se agrega "watch"
+ej:
+    pm2 start appProcess.js --name="server-cluster" --watch -i max
+    forever start -watch appProcess.js
+
+
+Finalizacion de procesos
+ej:
+    pm2 stop 2
+
+
+ejemplo del resultado
+
+│ id  │ name              │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │       
+├─────┼───────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤       
+│ 0   │ appProcess        │ default     │ 1.0.0   │ fork    │ 0        │ 0      │ 0    │ stopped   │ 0%       │ 0b       │ felip    │ disabled │       
+│ 1   │ server-cluster    │ default     │ 1.0.0   │ cluster │ 7008     │ 42m    │ 0    │ online    │ 0%       │ 23.4mb   │ felip    │ disabled │       
+│ 2   │ server-cluster    │ default     │ 1.0.0   │ cluster │ 0        │ 0      │ 0    │ stopped   │ 0%       │ 0b       │ felip    │ disabled │       
+│ 3   │ server-cluster    │ default     │ 1.0.0   │ cluster │ 6728     │ 42m    │ 0    │ online    │ 0%       │ 24.0mb   │ felip    │ disabled │       
+│ 4   │ server-cluster    │ default     │ 1.0.0   │ cluster │ 17144    │ 42m    │ 0    │ online    │ 0%       │ 23.2mb   │ felip    │ disabled │       
+│ 5   │ server-cluster    │ default     │ 1.0.0   │ cluster │ 24876    │ 42m    │ 0    │ online    │ 0%       │ 23.4mb   │ felip    │ disabled │       
+│ 6   │ server-cluster    │ default     │ 1.0.0   │ cluster │ 19808    │ 42m    │ 0    │ online    │ 0%       │ 24.0mb   │ felip    │ disabled │       
+│ 7   │ server-cluster    │ default     │ 1.0.0   │ cluster │ 12528    │ 42m    │ 0    │ online    │ 0%       │ 23.5mb   │ felip    │ disabled │       
+│ 8   │ server-cluster    │ default     │ 1.0.0   │ cluster │ 8452     │ 42m    │ 0    │ online    │ 0%       │ 15.5mb   │ felip    │ disabled │       
+└─────┴───────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘ 
+
